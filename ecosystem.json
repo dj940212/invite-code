@@ -1,7 +1,7 @@
 {
   "apps" : [
     {
-    "name"      : "taoke",
+    "name"      : "invite-code",
     "script"    : "app.js",
     "env": {
       "COMMON_VARIABLE": "true"
@@ -16,8 +16,8 @@
       "host" : ["47.98.187.34"],
       "port": "22",
       "ref"  : "origin/master",
-      "repo" : "https://github.com/dj940212/taoke.git",
-      "path" : "/root/projects/taoke",
+      "repo" : "https://github.com/dj940212/invite-code.git",
+      "path" : "/root/projects/invite-code",
       "ssh_options": "StrictHostKeyChecking=no",
       "post-deploy" : "cnpm install && pm2 startOrRestart ecosystem.json --env production",
       "env"  : {
