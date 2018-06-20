@@ -62,13 +62,13 @@
 		}
 
 		.beatMain .imgContainer {
-			padding: 0 16px;
+			/*padding: 0 16px;*/
 			margin: 14px auto;
 			text-align: center;
 		}
 
 		.beatMain .imgContainer img {
-			width: 90%;
+			width: 100%;
 			height: auto;
 			box-shadow: 0px 3px 12px rgba(21, 0, 71, 0.16);
 		}
@@ -105,6 +105,21 @@
 			font-size: 12px;
 			color: rgba(0, 0, 0, .4);
 			text-align: center;
+		}
+		.beatMain .text {
+			margin-top: 10px;
+		}
+		.beatMain .text .taokeTitle {
+			text-align: center;
+			font-size: 16px;
+			color: #fd7326;
+			font-weight: bold;
+		}
+
+		.beatMain .text .taokeContent {
+			margin-top: 10px;
+			font-size: 12px;
+			color: #666;
 		}
 
 		.beatWord {
@@ -168,23 +183,12 @@
 <body>
 
 	<div class="beatMain">
-		<div class="imgContainer">
-			<!-- <img id="img" src="http://img.alicdn.com/bao/uploaded/i2/2981597322/TB1NGcDSFXXXXbZXFXXXXXXXXXX_!!0-item_pic.jpg"> -->
-			<img id="img" src="" alt="">
+		<div class="text">
+			<div class="taokeTitle">购物前简单几步,帮你省下一大笔钱</div>
+			<div class="taokeContent">你加的微信机器人不仅仅能领邀请码，还是一个购物省钱助手，90%的商品都有返利或者内部优惠券，这是商家为了推广投入的</div>
 		</div>
-		<!-- <div>
-			点击下面按钮，复制框内文字
-		</div> -->
-		<p class="itemContent">
-			<strong class="itemPrice"></strong>
-			<div id="item_title" style="font-weight: 700;font-size: 14px;margin-bottom: 5px;"></div>
-		</p>
-		<div class="beatWord">
-			<fieldset>
-				<legend id="copy_tip">点击下面按钮>打开手淘>进入自动弹出的商品>完成购买</legend>
-				<p id="itemWord" class="itemWord" style="font-size: 12px;">复制框内整段文字，打开「手淘」即可「领取优惠券」并购买<span id="taokey"></span></p>
-			</fieldset>
-			<button id="copy" type="button" data-clipboard-text="" class="itemCopy" style="display:none;">点击复制,打开淘宝优惠购物</button>
+		<div class="imgContainer">
+			<img id="img" src="http://image.dingjian.name/test1.jpeg" alt="">
 		</div>
 		<div class="inviteCode">
 			<div class="code">复制框内整段文本<span class="actcodeText">$0w3kp27siax$</span>发送到公众号【三句多】即可增加一次饿了么大红包领取机会</div>
@@ -193,31 +197,9 @@
 		</div>
 		<script type="text/javascript" src="./js/clipboard.min.js"></script>
 		<script>
-			function getParams(paras) {
-				var url = decodeURI(location.href);
-				// var url = location.href;
-				var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
-				var returnValue;
-				for (i = 0; i < paraString.length; i++) {
-					var tempParas = paraString[i].split('=')[0];
-					var parasValue = paraString[i].split('=')[1];
-					if (tempParas === paras)
-						returnValue = parasValue;
-				}
-				if (typeof(returnValue) == "undefined") {
-					return "";
-				} else {
-					return returnValue;
-				}
-			}
-
 			function getActcode2() {
-				var subDomin = ""
-				if(location.href.indexOf("localhost") > -1) {
-					subDomin = "a"
-				}else {
-					subDomin = location.href.split('/')[2].split('.')[0]
-				}
+				console.log(location.href)
+				const subDomin = location.href.split('?')[1].split('=')[1]
 				console.log("subDomin", subDomin)
 				$.ajax({
 					url:"http://fuli.dingjian.name/actcode2?subDomain=" + subDomin,
@@ -231,51 +213,7 @@
 			    	}
 				})
 			}
-
-			$(function() {
-				getActcode2()
-				var taowords = getParams('taowords');
-				var url = decodeURIComponent(getParams('url'));
-				var image = decodeURIComponent(getParams('image'));
-
-				$('#img').attr('src', image);
-				$('#coupons').attr('href', url);
-				$('#copy').attr('data-clipboard-text', '￥' + taowords + '￥');
-				// $('#codeCopy').attr('data-clipboard-text', '$' + "0w3kp27siax" + '$');
-				$('#taokey').text('￥' + taowords + '￥');
-			})
-
-
-			//复制淘口令
-			var clipboard = new Clipboard('.itemCopy');
-			clipboard.on('success',
-				function(e) {
-					console.log(e)
-					if (e.trigger.disabled == false || e.trigger.disabled == undefined) {
-						e.trigger.innerHTML = "复制成功，打开淘宝会自动弹出口令";
-						e.trigger.style.backgroundColor = "#9ED29E";
-						e.trigger.style.borderColor = "#9ED29E";
-						//e.clearSelection();
-						e.trigger.disabled = true;
-						//2秒后按钮恢复原状
-						setTimeout(function() {
-								e.trigger.innerHTML = "点击复制,打开淘宝优惠购物";
-								e.trigger.style.backgroundColor = "#f54d23";
-								e.trigger.style.borderColor = "#f54d23";
-								e.trigger.disabled = false;
-							},
-							8000);
-					}
-				});
-
-
-			clipboard.on('error',
-				function(e) {
-					e.trigger.innerHTML = "复制失败";
-					e.trigger.style.backgroundColor = "#8f8f8f";
-					e.trigger.style.borderColor = "#8f8f8f";
-				}
-			);
+			getActcode2()
 
 			//复制邀请码
 			var clipboardCode = new Clipboard('.codeCopy');
@@ -309,6 +247,7 @@
 					e.trigger.style.borderColor = "#8f8f8f";
 				}
 			);
+
 			$(function() {
 
 				//UA判断
