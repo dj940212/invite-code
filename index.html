@@ -204,6 +204,8 @@
 				var url = "http://fuli.dingjian.name/actcode2" 
 				if (obj.type === "emama") {
 					url = "http://emama2.laosunwang.cn/actcode2"
+				}else if (obj.type === "jiyou") {
+					url = "http://jiyou.dingjian.name/actcode2"
 				}
 
 				$.ajax({
@@ -245,6 +247,8 @@
 						var query = parseQuery(location.href)
 						if (query.type === 'emama') {
 							$('#weixinImg').attr('src', 'http://image.dingjian.name/WechatIMG1207.jpeg');
+						}else if (query.type === 'jiyou') {
+							$('#weixinImg').attr('src', 'https://i.loli.net/2018/06/26/5b31b90309afa.jpg');
 						}else {
 							$('#weixinImg').attr('src', 'https://i.loli.net/2018/05/30/5b0e1404818b2.jpg');
 						}
